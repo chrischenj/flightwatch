@@ -20,6 +20,8 @@ upgrading to business class, in cost per extra hour of sleep.**
 
 The zip is a plain source bundle: keep the folder structure, then run from inside it.
 
+> **Download page / 下载页:** https://chrischenj.github.io/flightwatch/
+
 ## English Overview
 
 **The problem.** Airlines and OTAs only sell you a direct flight or one connecting itinerary, and
@@ -109,6 +111,8 @@ Full text: [DISCLAIMER.md](DISCLAIMER.md).
 
 > 压缩包是源码包：解压后保持目录结构，在该目录里运行即可。需要先装好 Python，
 > 安装时勾选「Add python.exe to PATH」。
+
+> **下载页（可直接下载 zip）：** https://chrischenj.github.io/flightwatch/
 
 纯 Python 标准库，**零第三方依赖**；自带本地网页界面、命令行、往返对比、HTML 报告和定时监控。
 
