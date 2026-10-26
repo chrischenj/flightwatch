@@ -1,0 +1,515 @@
+{
+  "ok": true,
+  "query": {
+    "origin": "BJS",
+    "origin_name": "北京",
+    "destination": "JFK",
+    "destination_name": "纽约",
+    "date": "2026-12-10",
+    "date_window": 1,
+    "adults": 1,
+    "currency": "CNY",
+    "hubs": ["IST", "DOH"],
+    "max_ground_min": 1200,
+    "max_stops": 1
+  },
+  "generated_at": "2026-10-25T22:00:00+08:00",
+  "source": {
+    "name": "Kiwi.com 离线样例（fixture）",
+    "live": false
+  },
+  "baseline": {
+    "through_economy": {
+      "price": 5120.0,
+      "duration_min": 1180,
+      "stops": 1,
+      "label": "整程经济舱"
+    },
+    "through_business": {
+      "price": 21500.0,
+      "duration_min": 1180,
+      "stops": 1,
+      "label": "整程公务舱"
+    }
+  },
+  "plans": [
+    {
+      "hub": "IST",
+      "hub_name": "伊斯坦布尔",
+      "label": "北京 → 伊斯坦布尔 + 伊斯坦布尔 → 纽约",
+      "note": "在伊斯坦布尔机场（IST）同一机场中转；行李不能直挂，需提取后重新托运、重新过安检；两段为非联程票，前段延误不保护衔接。",
+      "layovers_min": [195],
+      "legs": [
+        {
+          "index": 0,
+          "origin": "BJS",
+          "destination": "IST",
+          "distance_km": 7055.9,
+          "tz_shift_h": -5.0,
+          "options": {
+            "ECONOMY": {
+              "origin": "BJS",
+              "destination": "IST",
+              "depart_local": "2026-12-10T00:20:00",
+              "arrive_local": "2026-12-10T05:40:00",
+              "duration_min": 620,
+              "price": 2172.0,
+              "currency": "CNY",
+              "cabin": "ECONOMY",
+              "segments": [
+                {
+                  "carrier": "TK",
+                  "flight_no": "TK 89",
+                  "origin": "PEK",
+                  "destination": "IST",
+                  "depart_local": "2026-12-10T00:20:00",
+                  "arrive_local": "2026-12-10T05:40:00",
+                  "duration_min": 620,
+                  "cabin": "ECONOMY"
+                }
+              ],
+              "provider": "Kiwi.com",
+              "booking_url": null,
+              "stops": 0,
+              "self_transfer": false,
+              "deep_link": null
+            },
+            "BUSINESS": {
+              "origin": "BJS",
+              "destination": "IST",
+              "depart_local": "2026-12-10T00:20:00",
+              "arrive_local": "2026-12-10T05:40:00",
+              "duration_min": 620,
+              "price": 10845.0,
+              "currency": "CNY",
+              "cabin": "BUSINESS",
+              "segments": [
+                {
+                  "carrier": "TK",
+                  "flight_no": "TK 89",
+                  "origin": "PEK",
+                  "destination": "IST",
+                  "depart_local": "2026-12-10T00:20:00",
+                  "arrive_local": "2026-12-10T05:40:00",
+                  "duration_min": 620,
+                  "cabin": "BUSINESS"
+                }
+              ],
+              "provider": "Kiwi.com",
+              "booking_url": null,
+              "stops": 0,
+              "self_transfer": false,
+              "deep_link": null
+            }
+          },
+          "rest": {
+            "score": 50.8,
+            "effective_rest_h": {
+              "ECONOMY": 1.42,
+              "BUSINESS": 4.06
+            },
+            "sleep_h": 6.2,
+            "night_ratio": 0.6,
+            "verdict": "夜航 10 小时 20 分，睡眠窗口约 6.2 小时，升公务舱收益明显"
+          }
+        },
+        {
+          "index": 1,
+          "origin": "IST",
+          "destination": "JFK",
+          "distance_km": 8069.8,
+          "tz_shift_h": -8.0,
+          "options": {
+            "ECONOMY": {
+              "origin": "IST",
+              "destination": "JFK",
+              "depart_local": "2026-12-10T08:55:00",
+              "arrive_local": "2026-12-10T11:40:00",
+              "duration_min": 645,
+              "price": 2654.0,
+              "currency": "CNY",
+              "cabin": "ECONOMY",
+              "segments": [
+                {
+                  "carrier": "TK",
+                  "flight_no": "TK 1",
+                  "origin": "IST",
+                  "destination": "JFK",
+                  "depart_local": "2026-12-10T08:55:00",
+                  "arrive_local": "2026-12-10T11:40:00",
+                  "duration_min": 645,
+                  "cabin": "ECONOMY"
+                }
+              ],
+              "provider": "Kiwi.com",
+              "booking_url": null,
+              "stops": 0,
+              "self_transfer": false,
+              "deep_link": null
+            },
+            "BUSINESS": {
+              "origin": "IST",
+              "destination": "JFK",
+              "depart_local": "2026-12-10T08:55:00",
+              "arrive_local": "2026-12-10T11:40:00",
+              "duration_min": 645,
+              "price": 11350.0,
+              "currency": "CNY",
+              "cabin": "BUSINESS",
+              "segments": [
+                {
+                  "carrier": "TK",
+                  "flight_no": "TK 1",
+                  "origin": "IST",
+                  "destination": "JFK",
+                  "depart_local": "2026-12-10T08:55:00",
+                  "arrive_local": "2026-12-10T11:40:00",
+                  "duration_min": 645,
+                  "cabin": "BUSINESS"
+                }
+              ],
+              "provider": "Kiwi.com",
+              "booking_url": null,
+              "stops": 0,
+              "self_transfer": false,
+              "deep_link": null
+            }
+          },
+          "rest": {
+            "score": 0.0,
+            "effective_rest_h": {
+              "ECONOMY": 0.0,
+              "BUSINESS": 0.0
+            },
+            "sleep_h": 0.0,
+            "night_ratio": 0.0,
+            "verdict": "白天航班，没有夜间睡眠窗口，升舱只买到座位舒适度"
+          }
+        }
+      ],
+      "combos": [
+        {
+          "plan_hub": "IST",
+          "cabins": ["ECONOMY", "ECONOMY"],
+          "cabins_cn": ["经济舱", "经济舱"],
+          "total_price": 4826.0,
+          "currency": "CNY",
+          "total_duration_min": 1460,
+          "total_ground_min": 195,
+          "comfort_score": 1.42,
+          "price_delta": 0.0,
+          "rest_gain": 0.0,
+          "value_per_rest_hour": null,
+          "legs": []
+        },
+        {
+          "plan_hub": "IST",
+          "cabins": ["ECONOMY", "BUSINESS"],
+          "cabins_cn": ["经济舱", "公务舱"],
+          "total_price": 13522.0,
+          "currency": "CNY",
+          "total_duration_min": 1460,
+          "total_ground_min": 195,
+          "comfort_score": 1.42,
+          "price_delta": 8696.0,
+          "rest_gain": 0.0,
+          "value_per_rest_hour": null,
+          "legs": []
+        },
+        {
+          "plan_hub": "IST",
+          "cabins": ["BUSINESS", "ECONOMY"],
+          "cabins_cn": ["公务舱", "经济舱"],
+          "total_price": 13499.0,
+          "currency": "CNY",
+          "total_duration_min": 1460,
+          "total_ground_min": 195,
+          "comfort_score": 4.06,
+          "price_delta": 8673.0,
+          "rest_gain": 2.64,
+          "value_per_rest_hour": 3285.23,
+          "legs": []
+        },
+        {
+          "plan_hub": "IST",
+          "cabins": ["BUSINESS", "BUSINESS"],
+          "cabins_cn": ["公务舱", "公务舱"],
+          "total_price": 22195.0,
+          "currency": "CNY",
+          "total_duration_min": 1460,
+          "total_ground_min": 195,
+          "comfort_score": 4.06,
+          "price_delta": 17369.0,
+          "rest_gain": 2.64,
+          "value_per_rest_hour": 6579.17,
+          "legs": []
+        }
+      ],
+      "best_value": {
+        "leg_index": 0,
+        "cabin": "BUSINESS",
+        "extra_cost": 8673.0,
+        "extra_rest_h": 2.64,
+        "cost_per_rest_h": 3285.23
+      },
+      "pareto": [0, 2]
+    },
+    {
+      "hub": "DOH",
+      "hub_name": "多哈",
+      "label": "北京 → 多哈 + 多哈 → 纽约",
+      "note": "在哈马德国际机场（DOH）同一机场中转；行李不能直挂，需提取后重新托运；两段为非联程票，建议衔接留 3 小时以上。",
+      "layovers_min": [160],
+      "legs": [
+        {
+          "index": 0,
+          "origin": "BJS",
+          "destination": "DOH",
+          "distance_km": 6155.1,
+          "tz_shift_h": -5.0,
+          "options": {
+            "ECONOMY": {
+              "origin": "BJS",
+              "destination": "DOH",
+              "depart_local": "2026-12-10T19:35:00",
+              "arrive_local": "2026-12-10T23:40:00",
+              "duration_min": 545,
+              "price": 1980.0,
+              "currency": "CNY",
+              "cabin": "ECONOMY",
+              "segments": [
+                {
+                  "carrier": "QR",
+                  "flight_no": "QR 891",
+                  "origin": "PEK",
+                  "destination": "DOH",
+                  "depart_local": "2026-12-10T19:35:00",
+                  "arrive_local": "2026-12-10T23:40:00",
+                  "duration_min": 545,
+                  "cabin": "ECONOMY"
+                }
+              ],
+              "provider": "Kiwi.com",
+              "booking_url": null,
+              "stops": 0,
+              "self_transfer": false,
+              "deep_link": null
+            },
+            "BUSINESS": {
+              "origin": "BJS",
+              "destination": "DOH",
+              "depart_local": "2026-12-10T19:35:00",
+              "arrive_local": "2026-12-10T23:40:00",
+              "duration_min": 545,
+              "price": 8560.0,
+              "currency": "CNY",
+              "cabin": "BUSINESS",
+              "segments": [
+                {
+                  "carrier": "QR",
+                  "flight_no": "QR 891",
+                  "origin": "PEK",
+                  "destination": "DOH",
+                  "depart_local": "2026-12-10T19:35:00",
+                  "arrive_local": "2026-12-10T23:40:00",
+                  "duration_min": 545,
+                  "cabin": "BUSINESS"
+                }
+              ],
+              "provider": "Kiwi.com",
+              "booking_url": null,
+              "stops": 0,
+              "self_transfer": false,
+              "deep_link": null
+            }
+          },
+          "rest": {
+            "score": 69.0,
+            "effective_rest_h": {
+              "ECONOMY": 1.93,
+              "BUSINESS": 5.52
+            },
+            "sleep_h": 6.9,
+            "night_ratio": 0.76,
+            "verdict": "跨夜 9 小时，公务舱有效睡眠约 5.5 小时，本程最值得升舱的一段"
+          }
+        },
+        {
+          "index": 1,
+          "origin": "DOH",
+          "destination": "JFK",
+          "distance_km": 10772.3,
+          "tz_shift_h": -8.0,
+          "options": {
+            "ECONOMY": {
+              "origin": "DOH",
+              "destination": "JFK",
+              "depart_local": "2026-12-11T02:20:00",
+              "arrive_local": "2026-12-11T08:25:00",
+              "duration_min": 845,
+              "price": 3280.0,
+              "currency": "CNY",
+              "cabin": "ECONOMY",
+              "segments": [
+                {
+                  "carrier": "QR",
+                  "flight_no": "QR 701",
+                  "origin": "DOH",
+                  "destination": "JFK",
+                  "depart_local": "2026-12-11T02:20:00",
+                  "arrive_local": "2026-12-11T08:25:00",
+                  "duration_min": 845,
+                  "cabin": "ECONOMY"
+                }
+              ],
+              "provider": "Kiwi.com",
+              "booking_url": null,
+              "stops": 0,
+              "self_transfer": false,
+              "deep_link": null
+            },
+            "BUSINESS": {
+              "origin": "DOH",
+              "destination": "JFK",
+              "depart_local": "2026-12-11T02:20:00",
+              "arrive_local": "2026-12-11T08:25:00",
+              "duration_min": 845,
+              "price": 11200.0,
+              "currency": "CNY",
+              "cabin": "BUSINESS",
+              "segments": [
+                {
+                  "carrier": "QR",
+                  "flight_no": "QR 701",
+                  "origin": "DOH",
+                  "destination": "JFK",
+                  "depart_local": "2026-12-11T02:20:00",
+                  "arrive_local": "2026-12-11T08:25:00",
+                  "duration_min": 845,
+                  "cabin": "BUSINESS"
+                }
+              ],
+              "provider": "Kiwi.com",
+              "booking_url": null,
+              "stops": 0,
+              "self_transfer": false,
+              "deep_link": null
+            }
+          },
+          "rest": {
+            "score": 20.9,
+            "effective_rest_h": {
+              "ECONOMY": 0.59,
+              "BUSINESS": 1.68
+            },
+            "sleep_h": 4.2,
+            "night_ratio": 0.3,
+            "verdict": "凌晨起飞但航程大半在白天，升舱每多睡 1 小时约 ¥7,266，不划算"
+          }
+        }
+      ],
+      "combos": [
+        {
+          "plan_hub": "DOH",
+          "cabins": ["ECONOMY", "ECONOMY"],
+          "cabins_cn": ["经济舱", "经济舱"],
+          "total_price": 5260.0,
+          "currency": "CNY",
+          "total_duration_min": 1550,
+          "total_ground_min": 160,
+          "comfort_score": 2.52,
+          "price_delta": 0.0,
+          "rest_gain": 0.0,
+          "value_per_rest_hour": null,
+          "legs": []
+        },
+        {
+          "plan_hub": "DOH",
+          "cabins": ["ECONOMY", "BUSINESS"],
+          "cabins_cn": ["经济舱", "公务舱"],
+          "total_price": 13180.0,
+          "currency": "CNY",
+          "total_duration_min": 1550,
+          "total_ground_min": 160,
+          "comfort_score": 3.61,
+          "price_delta": 7920.0,
+          "rest_gain": 1.09,
+          "value_per_rest_hour": 7266.06,
+          "legs": []
+        },
+        {
+          "plan_hub": "DOH",
+          "cabins": ["BUSINESS", "ECONOMY"],
+          "cabins_cn": ["公务舱", "经济舱"],
+          "total_price": 11840.0,
+          "currency": "CNY",
+          "total_duration_min": 1550,
+          "total_ground_min": 160,
+          "comfort_score": 6.11,
+          "price_delta": 6580.0,
+          "rest_gain": 3.59,
+          "value_per_rest_hour": 1832.87,
+          "legs": []
+        },
+        {
+          "plan_hub": "DOH",
+          "cabins": ["BUSINESS", "BUSINESS"],
+          "cabins_cn": ["公务舱", "公务舱"],
+          "total_price": 19760.0,
+          "currency": "CNY",
+          "total_duration_min": 1550,
+          "total_ground_min": 160,
+          "comfort_score": 7.2,
+          "price_delta": 14500.0,
+          "rest_gain": 4.68,
+          "value_per_rest_hour": 3098.29,
+          "legs": []
+        }
+      ],
+      "best_value": {
+        "leg_index": 0,
+        "cabin": "BUSINESS",
+        "extra_cost": 6580.0,
+        "extra_rest_h": 3.59,
+        "cost_per_rest_h": 1832.87
+      },
+      "pareto": [0, 2, 3]
+    }
+  ],
+  "recommendation": {
+    "headline": "推荐「北京→多哈 + 多哈→纽约」拆分，只把第一段升公务舱：总价 ¥11,840，比整程公务舱省 ¥9,660，多睡 3.6 小时，合 ¥1,833/小时。",
+    "reasons": [
+      "推荐组合总价 ¥11,840，比整程公务舱（¥21,500）省 ¥9,660，同时拿到 6.1 小时有效休息。",
+      "最划算的升舱在第 1 段（北京→多哈）：多花 ¥6,580、多睡 3.6 小时，约 ¥1,833/小时；该段 19:35 起飞，睡眠窗口约 6.9 小时。",
+      "全经济舱拆分 ¥5,260，与整程经济舱（¥5,120）只差 ¥140，预算优先时可以选这一档。",
+      "伊斯坦布尔方案升公务舱多花 ¥8,673 只多睡 2.6 小时（¥3,285/小时），性价比约为多哈方案的 56%，因此不作首选。"
+    ],
+    "combo": {
+      "plan_hub": "DOH",
+      "cabins": ["BUSINESS", "ECONOMY"],
+      "cabins_cn": ["公务舱", "经济舱"],
+      "total_price": 11840.0,
+      "currency": "CNY",
+      "total_duration_min": 1550,
+      "total_ground_min": 160,
+      "comfort_score": 6.11,
+      "price_delta": 6580.0,
+      "rest_gain": 3.59,
+      "value_per_rest_hour": 1832.87,
+      "legs": []
+    },
+    "warnings": [
+      "分段票不是联程票：前段航班延误不保护后续衔接，行李通常不能直挂，需要自行重新托运并重新过安检。",
+      "需要提前核对中转国的过境签证要求（本次涉及卡塔尔/土耳其转机与美国入境政策），并确保护照、ESTA/签证状态有效。",
+      "若前段延误导致误机，后段通常按自愿弃程处理、不可退改；建议两段之间至少留 3 小时。",
+      "价格为公开接口实时枚举，可能存在缓存延迟，下单前必须以航司或出票平台的最终价格为准。"
+    ]
+  },
+  "warnings": [
+    "分段票不是联程票：前段航班延误不保护后续衔接，行李通常不能直挂，需要自行重新托运并重新过安检。",
+    "需要提前核对中转国的过境签证要求（本次涉及卡塔尔/土耳其转机与美国入境政策），并确保护照、ESTA/签证状态有效。",
+    "若前段延误导致误机，后段通常按自愿弃程处理、不可退改；建议两段之间至少留 3 小时。",
+    "价格为公开接口实时枚举，可能存在缓存延迟，下单前必须以航司或出票平台的最终价格为准。"
+  ],
+  "errors": []
+}

@@ -1,0 +1,40 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.Python
+
+# ---- 虚拟环境 ----
+.venv/
+venv/
+env/
+
+# ---- 运行时产物 ----
+# 接口缓存（会自动重建）
+data/cache/
+# watch 命令存的价格快照
+data/history/
+# 本地导出的报告 / 截图
+_preview/
+*.tmp
+
+# ---- 编辑器 / 系统 ----
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 密钥 / 本地配置 ----
+.env
+.env.*
+*.local
+
+# ---- 打包产物 ----
+*.zip

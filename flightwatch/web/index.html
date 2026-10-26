@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>分舱段购票助手 · 长途拆分与升舱建议</title>
+  <meta name="description" content="把长途航线拆成两段分开买票，量化对比全经济舱 / 建议组合 / 全公务舱的成本与休息收益。">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#results">跳到结果</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">✈</span>
+        <div class="brand-text">
+          <h1>分舱段购票助手</h1>
+          <p class="tagline">把长途拆成两段分开买，算清楚「哪一段值得升公务舱」：多花多少钱、多睡多少小时。</p>
+        </div>
+      </div>
+      <div class="source-badge" id="source-badge" title="数据来源">等待查询…</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel query-panel" aria-labelledby="query-title">
+      <div class="section-head">
+        <h2 id="query-title" class="section-title">查询条件</h2>
+        <span class="section-sub">填好条件点「查询」；接口不通时会自动回退到本地示例数据</span>
+      </div>
+
+      <form id="query-form" novalidate autocomplete="off">
+        <div class="field-grid">
+          <label class="field">
+            <span>出发城市</span>
+            <input id="origin" name="origin" type="text" value="BJS" placeholder="北京 / BJS" spellcheck="false">
+          </label>
+          <label class="field">
+            <span>到达城市</span>
+            <input id="destination" name="destination" type="text" value="JFK" placeholder="纽约 / JFK" spellcheck="false">
+          </label>
+          <label class="field">
+            <span>出发日期</span>
+            <input id="date" name="date" type="date" value="2026-12-10" required>
+          </label>
+          <label class="field">
+            <span>返程日期（填了就做往返整合对比）</span>
+            <input id="ret-date" name="return_date" type="date">
+          </label>
+          <label class="field">
+            <span>候选枢纽（逗号分隔，留空自动挑）</span>
+            <input id="hubs" name="hubs" type="text" value="IST,DOH" placeholder="IST,DOH" spellcheck="false">
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" id="submit-btn" type="submit">查询拆分方案</button>
+          <label class="switch">
+            <input id="offline" type="checkbox">
+            <span>离线演示（优先请求后端离线夹具；后端不可用时加载内置示例数据）</span>
+          </label>
+          <label class="switch">
+            <input id="refresh" type="checkbox" checked>
+            <span>每次都取 Kiwi 最新价（跳过本地缓存）</span>
+          </label>
+        </div>
+
+        <p class="hint">对比区始终给出「全经济舱 / 建议组合 / 全公务舱」三档，点任意一档可以切换高亮，并联动每段的「已升舱」标记。</p>
+        <p id="status" class="status" role="status" aria-live="polite">准备就绪。</p>
+      </form>
+    </section>
+
+    <div id="app-error" class="notice error hidden" role="alert"></div>
+
+    <div id="results" aria-live="polite" aria-busy="false">
+      <div class="notice loading" role="status">
+        <span class="spinner" aria-hidden="true"></span>
+        <span>正在加载页面数据…</span>
+      </div>
+    </div>
+
+    <noscript>
+      <div class="notice error">
+        <h2>需要启用 JavaScript</h2>
+        <p class="notice-lead">本页面是纯前端单页应用，请在浏览器设置中允许 JavaScript 后刷新。</p>
+      </div>
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>价格为公开接口实时枚举的最低档位，仅供参考，下单前请以航司或 OTA 页面复核。</p>
+      <p>分段购票不是联程票：行李通常需重新托运、航班延误不保护衔接；下单前务必核对过境签证与最终价格。</p>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>

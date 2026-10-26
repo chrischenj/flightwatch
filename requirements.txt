@@ -1,0 +1,14 @@
+# 本项目零第三方依赖，只需要 Python 3.9+ 标准库。
+#
+# 因此这个文件刻意保持为空——`pip install -r requirements.txt` 不会安装任何东西。
+# 如果你要参与开发，建议：
+#
+#   python -m venv .venv
+#   .venv\Scripts\activate        (Windows)
+#   source .venv/bin/activate     (macOS / Linux)
+#   pip install -e .
+#
+# 运行测试不需要 pytest，直接：
+#
+#   python tests/test_engine.py
+#   python tests/test_api.py
