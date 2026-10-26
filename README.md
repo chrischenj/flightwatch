@@ -1,18 +1,94 @@
-# 分段买票 + 分舱位比价助手（flightwatch）
+# flightwatch
+
+**Split-ticket & cabin comparison for long-haul flights — find out which leg is actually worth
+upgrading to business class, in cost per extra hour of sleep.**
 
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](pyproject.toml)
 
-> **Split a long-haul flight into separately-booked segments, and find out which leg is actually
-> worth upgrading to business class — in money-per-hour-of-sleep.**
->
-> 长途航线能不能拆成几段分别买票，并且只把其中「最值得休息」的那一段升成公务舱？
-> 这个工具用「每多睡 1 小时要花多少钱」把这件事算清楚。
+![local web UI](docs/screenshots/ui.png)
+
+## English Overview
+
+**The problem.** Airlines and OTAs only sell you a direct flight or one connecting itinerary, and
+the whole itinerary is locked to a single cabin class. On a long-haul trip that leaves two bad
+options: fly the entire way in economy, or pay for business class on every segment.
+
+**What this tool does.** It splits the journey at a hub into separately booked one-way tickets,
+prices every segment in both cabins, and ranks upgrades by **cost per extra hour of sleep**
+instead of by raw price difference.
+
+### How the recommendation is made
+
+1. **Split** — choose hubs where the detour ratio `(d(origin,hub) + d(hub,dest)) / d(origin,dest)`
+   stays under `1.6`, so you never route absurdly far just to save money.
+2. **Price** — cheapest economy and cheapest business for each segment; combine them into all
+   four cabin mixes, plus the cheapest through fare as a baseline.
+3. **Score** — `effective_rest = night_hours × (0.15 + 0.85 × night_ratio) × cabin_comfort`
+   with `economy 0.35 / premium 0.60 / business 1.00 / first 1.15`, then
+   `cost_per_rest_hour = upgrade_price_delta / rest_delta`.
+4. **Guard** — an upgrade is only recommended if it adds **≤ 4 hours** of total travel time and
+   costs **≤ ¥4,000 per extra hour of rest**. Otherwise the tool explicitly says *“don't upgrade
+   this time”* — it is built to say no when the numbers are bad.
+
+### Features
+
+- **Split-ticket pricing** — 2 segments × 2 cabins → 4 mixed combos, compared against the cheapest
+  single itinerary.
+- **Nonstop baseline** — every query also prices the whole journey with `maxStopsCount=0`, so you
+  can weigh “pay ¥X more, save Y hours” directly.
+- **Round-trip integration** — one return ticket / two one-ways / split outbound only / split
+  return only / split both / nonstop return, sorted by total price.
+- **Live data, honest fallbacks** — prices and even city-name lookup come from Kiwi.com's public
+  GraphQL endpoint in real time; a deterministic offline fixture keeps demos and tests network-free.
+- **Four ways to use it** — local web UI, CLI, exportable HTML report, and a `watch` price monitor.
+- **Zero dependencies** — Python standard library only (3.9+).
+
+### Quick start
+
+```bash
+git clone https://github.com/chrischenj/flightwatch.git
+cd flightwatch
+
+python -m flightwatch serve                 # local web UI → http://127.0.0.1:8765/
+
+python -m flightwatch plan \
+  --from PEK --to JFK --date 2026-12-10 --hubs IST,DOH      # one-way
+python -m flightwatch plan \
+  --from PEK --to JFK --date 2026-12-10 --return 2026-12-18 # round trip
+python -m flightwatch plan ... --offline                    # no network, synthetic data
+```
+
+Sample output (real query, one-way, economy vs business on each segment):
+
+```
+整程直搜最低：经济舱 ¥4,366 / 24小时45分 / 1次中转
+整程直飞：    经济舱 ¥6,771 / 15小时25分 / 0次中转
+  → 直飞 15 小时、¥6,771；比最低中转贵 ¥2,405，但省 9 小时（中转全程 24 小时）
+```
+
+```bash
+python tests/test_engine.py      # 33 cases
+python tests/test_api.py         # 20 cases
+```
+
+### Data source & disclaimer
+
+Prices come from the public GraphQL endpoint used by the Kiwi.com web frontend
+(`api.skypicker.com/umbrella/v2`). It is **not** an official open API: no stability guarantee, rate
+limited, subject to Kiwi.com's terms. This project is **not affiliated with Kiwi.com** — use it at
+low frequency for personal research only, and always re-check the final price before booking.
+Full text: [DISCLAIMER.md](DISCLAIMER.md).
+
+> The web UI, CLI output and the rest of this README are currently in Chinese.
+> English localisation of the UI is a welcome pull request.
+
+---
+
+## 中文说明
 
 纯 Python 标准库，**零第三方依赖**；自带本地网页界面、命令行、往返对比、HTML 报告和定时监控。
-
-![本地网页界面](docs/screenshots/ui.png)
 
 平台（携程/去哪儿/航司官网/Kiwi）只会给你两种答案：整程直飞或整程中转，且整程只有一个舱位。
 这个工具绕过这个限制：它把整程**按枢纽切成若干段**，每段**单独查经济舱和公务舱的最低价**，
