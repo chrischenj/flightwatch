@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flightwatch — 拆段买长途机票，把公务舱留给最累的一段</title>
+<meta name="description" content="Split long-haul flights into separately-booked segments and find which leg is worth upgrading to business class — ranked by cost per extra hour of sleep. 零依赖 Python 工具。">
+<meta property="og:title" content="flightwatch">
+<meta property="og:description" content="拆段买长途机票，算清哪一段值得升公务舱 —— 每多睡 1 小时要花多少钱。">
+<meta property="og:image" content="screenshots/social-preview.png">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --bg: #0b1020; --panel: #131b2e; --line: #24314b; --ink: #e8edf7;
+    --muted: #8b9ab5; --brand: #4da3ff; --biz: #ffb347; --ok: #43d19e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink); line-height: 1.65;
+    font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  }
+  a { color: var(--brand); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+  header { padding: 62px 0 40px; border-bottom: 1px solid var(--line);
+    background: radial-gradient(900px 380px at 12% -30%, rgba(77,163,255,.22), transparent 70%); }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+  .mark { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center;
+    background: linear-gradient(135deg,#4da3ff,#2563eb); font-size: 20px; }
+  .brand span { letter-spacing: .16em; text-transform: uppercase; font-size: 15px;
+    color: var(--muted); font-weight: 600; }
+  h1 { font-size: 40px; line-height: 1.18; letter-spacing: -.6px; }
+  h1 em { font-style: normal; color: var(--brand); }
+  .sub { margin-top: 18px; font-size: 18px; color: #c3d2ea; max-width: 760px; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; align-items: center; }
+  .btn { display: inline-block; padding: 13px 24px; border-radius: 11px; font-weight: 700;
+    font-size: 16px; border: 1px solid transparent; }
+  .btn.primary { background: linear-gradient(135deg,#4da3ff,#2563eb); color: #fff; }
+  .btn.primary:hover { text-decoration: none; filter: brightness(1.08); }
+  .btn.ghost { border-color: var(--line); color: var(--ink); }
+  .btn.ghost:hover { text-decoration: none; border-color: #3b4d70; }
+  .req { font-size: 13px; color: var(--muted); }
+  section { padding: 46px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 22px; margin-bottom: 18px; }
+  .shot { width: 100%; max-height: 620px; object-fit: cover; object-position: top center;
+    border-radius: 14px; border: 1px solid var(--line); display: block; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 13px; padding: 18px; }
+  .card h3 { font-size: 16px; margin-bottom: 6px; }
+  .card p { font-size: 14px; color: var(--muted); }
+  pre { background: #0a1223; border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; overflow-x: auto; font-size: 13.5px; line-height: 1.7;
+    font-family: ui-monospace, Consolas, monospace; color: #cfe0ff; }
+  .note { font-size: 13px; color: var(--muted); }
+  .warn { border-left: 3px solid var(--biz); padding-left: 14px; color: #d8c9a8; font-size: 14px; }
+  footer { padding: 34px 0 56px; color: var(--muted); font-size: 14px; }
+  footer a { color: #a9c0e8; }
+  @media (max-width: 620px) { h1 { font-size: 30px; } .sub { font-size: 16px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><div class="mark">✈</div><span>flightwatch</span></div>
+    <h1>拆段买长途机票，<br>把公务舱留给<em>最累的那一段</em>。</h1>
+    <p class="sub">
+      平台只卖「整程直飞 / 整程中转，且整程同一个舱位」。这个工具把整程按枢纽拆成几段分别买票，
+      每段单独查经济舱和公务舱的最低价，再用 <strong>「每多睡 1 小时要花多少钱」</strong> 告诉你
+      到底该升哪一段 —— 或者干脆别升。
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/chrischenj/flightwatch/releases/latest">
+        ⬇ 下载最新版 zip
+      </a>
+      <a class="btn ghost" href="https://github.com/chrischenj/flightwatch">在 GitHub 查看源码</a>
+      <span class="req">需要 Python 3.9+ · 零第三方依赖 · MIT</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>界面长这样</h2>
+    <img class="shot" src="screenshots/ui.png" alt="flightwatch 本地网页界面截图">
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>三步就能用</h2>
+    <pre>1) 下载并解压 flightwatch-v0.1.0.zip
+2) Windows 双击 start-windows.bat         （macOS / Linux 在该目录执行下面这行）
+   python -m flightwatch serve
+3) 浏览器打开 http://127.0.0.1:8765/ ，填出发城市 / 到达城市 / 日期</pre>
+    <p class="note">命令行同样可用：<code>python -m flightwatch plan --from PEK --to JFK --date 2026-12-10 --hubs IST,DOH</code></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>它到底在算什么</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>拆段比价</h3>
+        <p>按枢纽把整程切成 2 段，每段独立查经济舱 / 公务舱最低价，组合出 4 种混搭，
+           和整程直飞、最低中转并列对比。</p>
+      </div>
+      <div class="card">
+        <h3>升舱性价比</h3>
+        <p>有效休息 = 夜间可睡时长 × 时段权重 × 舱位舒适系数；
+           用「每多睡 1 小时的成本」排序，而不是只看差价。</p>
+      </div>
+      <div class="card">
+        <h3>会劝退的护栏</h3>
+        <p>升舱让全程多 4 小时以上，或每多睡 1 小时超过 ¥4,000 —— 直接告诉你
+           「本轮不建议升舱」，不硬推。</p>
+      </div>
+      <div class="card">
+        <h3>直飞基准线</h3>
+        <p>每次额外查一次整程不中转的报价，让你能算清「多花 ¥X 换少飞 Y 小时」值不值。</p>
+      </div>
+      <div class="card">
+        <h3>往返整合</h3>
+        <p>一张往返票 / 两张单程 / 去程拆 / 回程拆 / 双向都拆 / 直飞往返，按总价排序。</p>
+      </div>
+      <div class="card">
+        <h3>实时 + 可离线</h3>
+        <p>价格实时取自 Kiwi 公开接口；同时内置离线数据源，没网也能演示和跑测试。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>先说清楚风险</h2>
+    <p class="warn">
+      分段买票不是联程票：前一段延误/取消不保护后一段，行李通常需要重新托运，
+      过境签证要自己确认。价格是搜索枚举价而非报价承诺，下单前请以航司 / OTA 页面为准。
+      本项目与 Kiwi.com 无隶属关系，数据来自其网页端使用的公开端点，请低频自用。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://github.com/chrischenj/flightwatch">GitHub</a> ·
+    <a href="https://github.com/chrischenj/flightwatch/releases/latest">Releases</a> ·
+    <a href="https://github.com/chrischenj/flightwatch/blob/main/DISCLAIMER.md">免责声明</a> ·
+    <a href="https://github.com/chrischenj/flightwatch/blob/main/LICENSE">MIT License</a>
+  </div>
+</footer>
+
+</body>
+</html>
