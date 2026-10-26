@@ -10,6 +10,16 @@ upgrading to business class, in cost per extra hour of sleep.**
 
 ![local web UI](docs/screenshots/ui.png)
 
+### Download
+
+| What you want | Where to get it |
+|---|---|
+| **Zip bundle** (no git needed) | [**Latest release**](https://github.com/chrischenj/flightwatch/releases/latest) → download `flightwatch-vX.Y.Z.zip` → unzip → double-click `start-windows.bat` (Windows) or run `python -m flightwatch serve` |
+| **Source** | `git clone https://github.com/chrischenj/flightwatch.git` |
+| **Requirements** | Python **3.9+**, **no third-party packages** (standard library only) |
+
+The zip is a plain source bundle: keep the folder structure, then run from inside it.
+
 ## English Overview
 
 **The problem.** Airlines and OTAs only sell you a direct flight or one connecting itinerary, and
@@ -88,6 +98,17 @@ Full text: [DISCLAIMER.md](DISCLAIMER.md).
 ---
 
 ## 中文说明
+
+### 下载
+
+| 你想要 | 去哪里拿 |
+|---|---|
+| **压缩包**（不用装 git） | [**最新 Release**](https://github.com/chrischenj/flightwatch/releases/latest) → 下载 `flightwatch-vX.Y.Z.zip` → 解压 → Windows 双击 `start-windows.bat`，其他系统在该目录执行 `python -m flightwatch serve` |
+| **源码** | `git clone https://github.com/chrischenj/flightwatch.git` |
+| **环境要求** | Python **3.9+**，**零第三方依赖**（只用标准库） |
+
+> 压缩包是源码包：解压后保持目录结构，在该目录里运行即可。需要先装好 Python，
+> 安装时勾选「Add python.exe to PATH」。
 
 纯 Python 标准库，**零第三方依赖**；自带本地网页界面、命令行、往返对比、HTML 报告和定时监控。
 
