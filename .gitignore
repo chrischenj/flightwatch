@@ -17,6 +17,7 @@ env/
 # ---- 运行时产物 ----
 # 接口缓存（会自动重建）
 data/cache/
+flightwatch/cache/
 # watch 命令存的价格快照
 data/history/
 # 本地导出的报告 / 截图
@@ -38,3 +39,10 @@ desktop.ini
 
 # ---- 打包产物 ----
 *.zip
+*.spec
+dist/
+build/
+
+# ---- 临时截图 / 草稿 ----
+_landing*.png
+_*.html

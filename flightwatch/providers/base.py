@@ -4,13 +4,52 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import sys
+import tempfile
 import threading
 import time
 from typing import Any, Optional, Protocol
 
 from ..models import Leg
 
-CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "cache")
+
+def _cache_dir() -> str:
+    """挑一个可写的缓存目录。
+
+    - 打包版（PyInstaller）不能写 _MEIPASS，优先用户数据目录，其次临时目录；
+    - 普通运行写在仓库旁边的 data/cache；
+    - 任何一个候选目录不可写就自动降级，最后兜底到临时目录。
+    可用 FLIGHTWATCH_DATA_DIR 强制指定。
+    """
+    candidates: list[str] = []
+    env = os.environ.get("FLIGHTWATCH_DATA_DIR")
+    if env:
+        candidates.append(os.path.join(env, "cache"))
+    if getattr(sys, "frozen", False):
+        local = os.environ.get("LOCALAPPDATA")
+        if local:
+            candidates.append(os.path.join(local, "flightwatch", "cache"))
+        candidates.append(os.path.join(tempfile.gettempdir(), "flightwatch", "cache"))
+    else:
+        candidates.append(
+            os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "cache")
+        )
+
+    for path in candidates:
+        try:
+            path = os.path.abspath(path)          # 万一是相对路径，先转绝对
+            os.makedirs(path, exist_ok=True)
+            probe = os.path.join(path, ".write_probe")
+            with open(probe, "w", encoding="utf-8") as f:
+                f.write("ok")
+            os.remove(probe)
+            return path
+        except OSError:
+            continue
+    return os.path.abspath(tempfile.mkdtemp(prefix="flightwatch-cache-"))
+
+
+CACHE_DIR = _cache_dir()
 
 
 class Provider(Protocol):

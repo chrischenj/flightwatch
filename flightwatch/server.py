@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import mimetypes
 import os
+import sys
 import threading
 import time
 import uuid
@@ -13,7 +14,16 @@ from urllib.parse import parse_qs, urlparse
 
 from . import api, report
 
-WEB_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
+
+def _web_dir() -> str:
+    """静态资源目录。PyInstaller 打包后资源在 sys._MEIPASS 下。"""
+    base = getattr(sys, "_MEIPASS", None)
+    if base:
+        return os.path.join(base, "flightwatch", "web")
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
+
+
+WEB_DIR = _web_dir()
 
 _CACHE: dict[str, tuple[float, dict]] = {}
 _CACHE_LOCK = threading.Lock()

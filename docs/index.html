@@ -70,12 +70,18 @@
       到底该升哪一段 —— 或者干脆别升。
     </p>
     <div class="cta">
-      <a class="btn primary" href="https://github.com/chrischenj/flightwatch/releases/latest">
-        ⬇ 下载最新版 zip
+      <a class="btn primary" href="https://github.com/chrischenj/flightwatch/releases/download/v0.1.0/flightwatch-v0.1.0-windows-x64.zip">
+        ⬇ Windows 免安装版（不用装 Python）
       </a>
-      <a class="btn ghost" href="https://github.com/chrischenj/flightwatch">在 GitHub 查看源码</a>
-      <span class="req">需要 Python 3.9+ · 零第三方依赖 · MIT</span>
+      <a class="btn ghost" href="https://github.com/chrischenj/flightwatch/releases/download/v0.1.0/flightwatch-v0.1.0.zip">
+        源码包（需 Python 3.9+）
+      </a>
+      <a class="btn ghost" href="https://github.com/chrischenj/flightwatch/releases">全部版本</a>
     </div>
+    <p class="req" style="margin-top:14px">
+      免安装版解压后双击 <code>flightwatch.exe</code> 即可 · 源码包零第三方依赖 · MIT ·
+      <a href="https://github.com/chrischenj/flightwatch">GitHub 源码</a>
+    </p>
   </div>
 </header>
 
@@ -89,10 +95,15 @@
 <section>
   <div class="wrap">
     <h2>三步就能用</h2>
-    <pre>1) 下载并解压 flightwatch-v0.1.0.zip
-2) Windows 双击 start-windows.bat         （macOS / Linux 在该目录执行下面这行）
-   python -m flightwatch serve
-3) 浏览器打开 http://127.0.0.1:8765/ ，填出发城市 / 到达城市 / 日期</pre>
+    <pre>A. Windows 免安装版（推荐，不用装 Python）
+   1) 下载 flightwatch-v0.1.0-windows-x64.zip，解压到纯英文路径（如 D:\flightwatch\）
+   2) 双击 flightwatch.exe
+   3) 浏览器会自动打开 http://127.0.0.1:8765/ ，填城市 / 日期即可
+
+B. 源码包（需要 Python 3.9+）
+   1) 解压 flightwatch-v0.1.0.zip，在该目录执行 python -m flightwatch serve
+   2) （Windows 也可直接双击 start-windows.bat）
+   3) 浏览器打开 http://127.0.0.1:8765/</pre>
     <p class="note">命令行同样可用：<code>python -m flightwatch plan --from PEK --to JFK --date 2026-12-10 --hubs IST,DOH</code></p>
   </div>
 </section>
@@ -146,9 +157,11 @@
 <footer>
   <div class="wrap">
     <a href="https://github.com/chrischenj/flightwatch">GitHub</a> ·
-    <a href="https://github.com/chrischenj/flightwatch/releases/latest">Releases</a> ·
+    <a href="https://github.com/chrischenj/flightwatch/releases">Releases</a> ·
+    <a href="https://github.com/chrischenj/flightwatch/issues">问题反馈 / Contact (Issues)</a> ·
     <a href="https://github.com/chrischenj/flightwatch/blob/main/DISCLAIMER.md">免责声明</a> ·
     <a href="https://github.com/chrischenj/flightwatch/blob/main/LICENSE">MIT License</a>
+    <p style="margin-top:10px">遇到问题请开 Issue（不公开邮箱）；安全问题请用私密安全报告。</p>
   </div>
 </footer>
 

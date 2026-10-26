@@ -14,11 +14,14 @@ upgrading to business class, in cost per extra hour of sleep.**
 
 | What you want | Where to get it |
 |---|---|
-| **Zip bundle** (no git needed) | [**Latest release**](https://github.com/chrischenj/flightwatch/releases/latest) → download `flightwatch-vX.Y.Z.zip` → unzip → double-click `start-windows.bat` (Windows) or run `python -m flightwatch serve` |
+| **Windows portable** (no Python needed) | [**Latest release**](https://github.com/chrischenj/flightwatch/releases/latest) → `flightwatch-vX.Y.Z-windows-x64.zip` → unzip → double-click `flightwatch.exe` |
+| **Zip bundle** (source, needs Python 3.9+) | [**Latest release**](https://github.com/chrischenj/flightwatch/releases/latest) → `flightwatch-vX.Y.Z.zip` → unzip → double-click `start-windows.bat` (Windows) or run `python -m flightwatch serve` |
 | **Source** | `git clone https://github.com/chrischenj/flightwatch.git` |
-| **Requirements** | Python **3.9+**, **no third-party packages** (standard library only) |
+| **Requirements** | Source bundle: Python **3.9+**, **no third-party packages**. Windows portable: nothing. |
 
-The zip is a plain source bundle: keep the folder structure, then run from inside it.
+The source zip is a plain source bundle: keep the folder structure, then run from inside it.
+The Windows portable build is a PyInstaller folder — keep `flightwatch.exe` and `_internal/` together,
+and prefer an **ASCII path** (e.g. `D:\flightwatch\`) to avoid antivirus false positives.
 
 > **Download page / 下载页:** https://chrischenj.github.io/flightwatch/
 
@@ -105,12 +108,14 @@ Full text: [DISCLAIMER.md](DISCLAIMER.md).
 
 | 你想要 | 去哪里拿 |
 |---|---|
-| **压缩包**（不用装 git） | [**最新 Release**](https://github.com/chrischenj/flightwatch/releases/latest) → 下载 `flightwatch-vX.Y.Z.zip` → 解压 → Windows 双击 `start-windows.bat`，其他系统在该目录执行 `python -m flightwatch serve` |
+| **Windows 免安装版**（不用装 Python） | [**最新 Release**](https://github.com/chrischenj/flightwatch/releases/latest) → `flightwatch-vX.Y.Z-windows-x64.zip` → 解压 → 双击 `flightwatch.exe` |
+| **源码包**（需要 Python 3.9+） | [**最新 Release**](https://github.com/chrischenj/flightwatch/releases/latest) → `flightwatch-vX.Y.Z.zip` → 解压 → Windows 双击 `start-windows.bat`，其他系统执行 `python -m flightwatch serve` |
 | **源码** | `git clone https://github.com/chrischenj/flightwatch.git` |
-| **环境要求** | Python **3.9+**，**零第三方依赖**（只用标准库） |
+| **环境要求** | 源码包：Python **3.9+**，**零第三方依赖**；Windows 免安装版：什么都不用装 |
 
-> 压缩包是源码包：解压后保持目录结构，在该目录里运行即可。需要先装好 Python，
-> 安装时勾选「Add python.exe to PATH」。
+> 源码包：解压后保持目录结构，在该目录里运行即可。需要先装好 Python，安装时勾选「Add python.exe to PATH」。
+> Windows 免安装版：解压后把 `flightwatch.exe` 和 `_internal/` 文件夹放在一起，
+> 建议放在**纯英文路径**（如 `D:\flightwatch\`），避免个别杀毒软件误报。
 
 > **下载页（可直接下载 zip）：** https://chrischenj.github.io/flightwatch/
 
@@ -417,8 +422,23 @@ tests/
   test_api.py        集成与 HTTP 层单测（20 个用例）
 docs/
   SPEC.md            内部设计与接口契约（模块边界、JSON 契约、算法口径）
-  screenshots/       README 截图
+  index.html         GitHub Pages 下载页
+  screenshots/       README 与社交预览图
+packaging/
+  flightwatch_launcher.py  免安装版入口
+  build_windows.bat        自己打 Windows exe 的脚本（PyInstaller）
 ```
+
+### 打包 Windows 免安装版
+
+发布包里的 `flightwatch-vX.Y.Z-windows-x64.zip` 就是这么来的（仅开发者需要）：
+
+```bat
+packaging\build_windows.bat
+```
+
+它会用 PyInstaller 打出 `dist\flightwatch\flightwatch.exe`（onedir 形式）。
+**不要用 `--onefile`**：单文件版在中文路径下解压临时目录会失败，onedir 没这个问题。
 
 ### 开发自测
 
@@ -515,6 +535,21 @@ http://127.0.0.1:8765/#selftest=3
 - 分段购票有真实风险（非联程、行李不直挂、误机不保护、过境签证），详见第五、七节。
 
 完整版（含频率约束、隐私说明、无担保条款）见 [DISCLAIMER.md](DISCLAIMER.md)。
+
+## 联系方式 / Contact
+
+**统一通过 GitHub Issues 联系**（不公开邮箱，避免垃圾邮件）：
+
+- 🐞 报 bug / 提需求：[新建 Issue](https://github.com/chrischenj/flightwatch/issues/new/choose)
+- 💬 使用问题 / 想法讨论：[Issues](https://github.com/chrischenj/flightwatch/issues)
+- 🔒 安全问题（例如绕过限速、隐私泄露）：请**不要开公开 issue**，
+  用 [GitHub 私密安全报告](https://github.com/chrischenj/flightwatch/security/advisories/new) 提交。
+
+提问时请附上：操作系统、Python 版本（或免安装版）、查询的航线与日期、
+以及页面上的报错文字 / 黑窗口里的输出。这样能最快定位。
+
+> Contact: please use **GitHub Issues** — no email is published.
+> For security reports use the private advisory link above.
 
 ## 贡献
 
