@@ -11,14 +11,21 @@ jobs:
     name: test (py${{ matrix.python-version }} / ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     env:
-      # Windows 跑测试时 stdout 默认不是 UTF-8，中文用例名会编码报错
+      # Windows 跑测试时 stdout 默认不是 UTF-8，中文用例名/输出会编码报错
       PYTHONIOENCODING: utf-8
     strategy:
       fail-fast: false
+      # 显式列出矩阵：Python 3.9 在 ubuntu-24.04(latest) 上不再预装，固定到 22.04
       matrix:
-        os: [ubuntu-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
         include:
+          - os: ubuntu-22.04
+            python-version: "3.9"
+          - os: ubuntu-latest
+            python-version: "3.10"
+          - os: ubuntu-latest
+            python-version: "3.11"
+          - os: ubuntu-latest
+            python-version: "3.12"
           - os: windows-latest
             python-version: "3.11"
           - os: macos-latest
