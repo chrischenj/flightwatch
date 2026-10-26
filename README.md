@@ -4,6 +4,7 @@
 upgrading to business class, in cost per extra hour of sleep.**
 
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
+[![CI](https://github.com/chrischenj/flightwatch/actions/workflows/ci.yml/badge.svg)](https://github.com/chrischenj/flightwatch/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](pyproject.toml)
 
