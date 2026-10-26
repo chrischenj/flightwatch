@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test (py${{ matrix.python-version }} / ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    env:
+      # Windows 跑测试时 stdout 默认不是 UTF-8，中文用例名会编码报错
+      PYTHONIOENCODING: utf-8
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        include:
+          - os: windows-latest
+            python-version: "3.11"
+          - os: macos-latest
+            python-version: "3.11"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Show version
+        run: python --version
+
+      # 本项目零依赖，不装任何第三方包；测试用标准库 unittest
+      - name: Run engine tests
+        run: python tests/test_engine.py
+
+      - name: Run integration tests
+        run: python tests/test_api.py
+
+      - name: Smoke test CLI (offline, no network)
+        run: |
+          python -m flightwatch plan --from PEK --to JFK --date 2026-12-10 --hubs IST,DOH --offline
